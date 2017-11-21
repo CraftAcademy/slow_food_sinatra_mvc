@@ -28,22 +28,19 @@ APP_NAME = 'slow_food'
 # Some helper constants for path-centric logic
 require APP_ROOT.join('config', 'database')
 
-
 class SlowFoodApp < Sinatra::Base
-  enable :sessions
-  set :session_secret, ENV['SESSION_SECRET'] || 'this is a secret shhhhh'
-  set :method_override, true
-  set :root, APP_ROOT
-  set :views, File.join(APP_ROOT, "app", "views")
-  set :public_folder, File.join(APP_ROOT, "app", "public")
 
   # not_found do
   #   raise RuntimeError
   # end
-
-  configure do
-    disable :logger
-  end
+  disable :logger, :dump_errors
+  enable :sessions
+  set :session_secret, ENV['SESSION_SECRET'] || 'this is a secret shhhhh'
+  set :method_override, true
+  set :root, APP_ROOT
+  set :views, File.join(APP_ROOT, 'app', 'views')
+  set :public_folder, File.join(APP_ROOT, 'app', 'public')
+  set :show_exceptions, false
 end
 
 Dir[APP_ROOT.join('app', 'controllers', '*.rb')].each { |file| require file }
