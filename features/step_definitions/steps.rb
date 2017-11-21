@@ -10,7 +10,6 @@ Given(/^I visit the users page$/) do
 end
 
 Then(/^I should see "([^"]*)" users$/) do |count|
-  #binding.pry
   expect(page).to have_css 'div .user', count: count.to_i
 end
 

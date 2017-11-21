@@ -1,8 +1,5 @@
-
-
-APP_NAME = 'slow_food'
 # Log queries to STDOUT in development
-if Sinatra::Application.development?
+if development?
   ActiveRecord::Base.logger = Logger.new(STDOUT)
 end
 

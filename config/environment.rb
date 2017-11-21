@@ -16,12 +16,13 @@ require 'active_record'
 require 'logger'
 
 require 'sinatra'
-require "sinatra/reloader" if development?
-require 'pry' if development?
+require 'sinatra/reloader' if development?
+require 'pry' unless production?
 
 require 'erb'
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
+APP_NAME = 'slow_food'
 
 
 # Some helper constants for path-centric logic
@@ -40,10 +41,9 @@ class SlowFoodApp < Sinatra::Base
   #   raise RuntimeError
   # end
 
-# Set up the controllers and helpers
-
-
-# Set up the database and models
+  configure do
+    disable :logger
+  end
 end
 
 Dir[APP_ROOT.join('app', 'controllers', '*.rb')].each { |file| require file }
