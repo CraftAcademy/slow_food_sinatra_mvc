@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
   VALID_STATUS = ['pending', 'confirmed']
+  belongs_to :user
   has_many :order_items
 
   validates_inclusion_of :status, in: VALID_STATUS

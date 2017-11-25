@@ -24,14 +24,21 @@
   <header>
     <div id="login-toolbar">
       <% if current_user %>
-        <p>Logged in as: <%= current_user.name %></p>
-        <a href="/logout">Logout</a>
+        <p>
+          Logged in as: <%= current_user.name %>
+          <a href="/logout">Logout</a>
+        </p>
+
       <% else %>
+        <a href="/signup">Register</a>
         <a href="/login">Login</a>
       <% end %>
 
       <% if order %>
-        <a href="/checkout">Checkout</a>
+        <p>
+          You have ordered <%= order.order_items.count %> dishes.
+          <a href="/checkout">Checkout</a>
+        </p>
       <% end %>
   </header>
 
