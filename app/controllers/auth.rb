@@ -13,6 +13,11 @@ class SlowFoodApp
     erb :signup
   end
 
+  get '/logout' do
+    session[:user_id] = nil
+    redirect '/', notice: 'You are no longer logged in'
+  end
+
   get '/users' do
     @users = User.all
     erb :users_index
@@ -22,6 +27,7 @@ class SlowFoodApp
     user_params = params['user']
     user = User.new(user_params)
     if user.save
+      user.authenticate(user_params['password'])
       redirect '/', notice: "Thank you for signing up #{user.name}"
     else
       error_message = ''
@@ -33,7 +39,7 @@ class SlowFoodApp
 
   post '/signin' do
     user = User.find_by(name: params['user']['name'])
-    if user.authenticate(params['user']['password'])
+    if user && user.authenticate(params['user']['password'])
       session[:user_id] = user.id
       redirect '/', notice: "Welcome #{current_user.name}! You were successfully logged in."
     else

@@ -17,12 +17,15 @@ class SlowFoodApp
   end
 
   post '/finalize' do
-    order.update_attribute(:status, 'confirmed')
-    @pickup_time = pickup_time
-    # Send email to restaurant
+    if current_user
+      order.update_attributes(status: 'confirmed', user: current_user)
+      @pickup_time = pickup_time
+      # Send email to restaurant
+      session[:order_id] = nil
+      erb :finalized
+    else
+      redirect '/checkout', notice: 'You need to login before finalizing order'
+    end
 
-    session[:order_id] = nil
-
-    erb :finalized
   end
 end

@@ -1,11 +1,15 @@
-Feature: User with order can checkout
+Feature: User with order can checkout (if signed in)
   As a visitor
   In order to get the food I ordered
   I would like to be able to finalize my order (checkout)
 
 
   Background:
-    Given the following products exist
+    Given the following users exist
+      | name   | password    |
+      | Thomas | my_password |
+
+    And the following products exist
       | name      | price | description     | category    |
       | Pizza     | 50    | Great Pizza     | Main course |
       | Kebab     | 75    | Great Kebab     | Main course |
@@ -13,8 +17,10 @@ Feature: User with order can checkout
 
     And the time is "12:00"
 
-    Given I visit the site
-    Given there is an order with order item "Kebab"
+    And I am logged in as "Thomas" using the password "my_password"
+
+    And I visit the site
+    And there is an order with order item "Kebab"
     And there is an order with order item "Pizza"
 
 
@@ -30,9 +36,16 @@ Feature: User with order can checkout
       | Kebab   | 75    |
       | Pizza   | 50    |
 
-    Scenario: User can finalize his order
+    Scenario: Logged in user can finalize his order
       And I click "Checkout"
       And I click "Confirm order"
       Then I should see "Thank you for your business"
       And I should see "Confirmed pickup time: 12:30"
       And my order should be marked confirmed
+
+
+  Scenario: Not logged in user can not  finalize his order
+    Given I am logged out
+    And I click "Checkout"
+    And I click "Confirm order"
+    Then I should see "You need to login before finalizing order"

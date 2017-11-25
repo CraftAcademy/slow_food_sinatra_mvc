@@ -35,3 +35,19 @@ end
 Then(/^I should be on the sign in page$/) do
   expect(current_path).to eq '/login'
 end
+
+And(/^I am logged in as "([^"]*)" using the password "([^"]*)"$/) do |name, password|
+  steps %Q{
+    Given I visit the sign in page
+    And I fill in "Name" with "#{name}"
+    And I fill in "Password" with "#{password}"
+    And I click "Sign in"
+        }
+end
+
+
+Given(/^I am logged out$/) do
+  steps %q{
+    Given I click "Logout"
+        }
+end
