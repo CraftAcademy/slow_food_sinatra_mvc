@@ -45,3 +45,8 @@ And(/^my order should be marked confirmed$/) do
   @order.reload
   expect(@order).to be_confirmed
 end
+
+
+And(/^"([^"]*)" should receive an email$/) do |arg|
+  binding.pry
+end

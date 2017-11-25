@@ -6,8 +6,8 @@ Feature: User with order can checkout (if signed in)
 
   Background:
     Given the following users exist
-      | name   | password    |
-      | Thomas | my_password |
+      | name   | password    | email            |
+      | Thomas | my_password | random@random.se |
 
     And the following products exist
       | name      | price | description     | category    |
@@ -36,12 +36,13 @@ Feature: User with order can checkout (if signed in)
       | Kebab   | 75    |
       | Pizza   | 50    |
 
-    Scenario: Logged in user can finalize his order
-      And I click "Checkout"
-      And I click "Confirm order"
-      Then I should see "Thank you for your business"
-      And I should see "Confirmed pickup time: 12:30"
-      And my order should be marked confirmed
+  Scenario: Logged in user can finalize his order
+    And I click "Checkout"
+    And I click "Confirm order"
+    Then I should see "Thank you for your business"
+    And I should see "Confirmed pickup time: 12:30"
+    And my order should be marked confirmed
+    #And "thomas@craftacademy.se" should receive an email
 
 
   Scenario: Not logged in user can not  finalize his order

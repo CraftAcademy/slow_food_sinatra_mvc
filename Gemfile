@@ -16,10 +16,10 @@ gem 'activesupport'
 gem 'bcrypt'
 
 gem 'rake'
-
 gem 'shotgun'
-
 gem 'faker'
+gem 'dotenv'
+gem 'sendgrid-ruby'
 
 
 group :test do
@@ -30,6 +30,7 @@ group :test do
   gem 'cucumber', '~> 2.4'
   gem 'launchy'
   gem 'shoulda-matchers'
+  gem 'email_spec', require: 'email_spec'
 end
 
 group :test, :development do
