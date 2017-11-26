@@ -23,6 +23,16 @@
   </div>
 <% end %>
 
+<% flash.keys.each do |type| %>
+  <div class="flash">
+    <div class="row">
+      <div class="large-12 columns">
+        <%= flash[type] %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <div class="intro">
   <div class="row">
     <div class="large-12 columns">
@@ -53,17 +63,6 @@
     </div>
   </div>
 </div>
-
-<% flash.keys.each do |type| %>
-  <div class="flash">
-    <div class="row">
-      <div class="large-12 columns">
-        <%= flash[type] %>
-      </div>
-    </div>
-  </div>
-<% end %>
-
 
 <div class="about">
   <div class="row">
