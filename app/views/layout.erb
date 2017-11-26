@@ -1,54 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="en">
 <head>
-  <!--
-    normalize.css removes cross-browser differences in defaults, e.g.,
-    differences in how form elements appear between Firefox and IE
-    See: http://necolas.github.com/normalize.css/
-  -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <!--
-    application.css is where you put your styles
-  -->
-  <link rel="stylesheet" href="/css/application.css">
-  <!-- Load Vollkorn font -->
-  <link href='https://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
-
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="js/application.js"></script>
-
-  <title></title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Slow Food Sinatra</title>
+  <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="foundation-icons/foundation-icons.css">
+  <link rel="stylesheet" href="css/foundation.css"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<div id="content">
-  <header>
-    <div id="login-toolbar">
-      <% if current_user %>
-        <p>
-          Logged in as: <%= current_user.name %>
-          <a href="/logout">Logout</a>
-        </p>
 
-      <% else %>
-        <a href="/signup">Register</a>
-        <a href="/login">Login</a>
-      <% end %>
 
-      <% if order %>
-        <p>
-          You have ordered <%= order.order_items.count %> dishes.
-          <a href="/checkout">Checkout</a>
-        </p>
-      <% end %>
-  </header>
-
-  <% flash.keys.each do |type| %>
-    <div>
-      <%= flash[type] %>
+<% if order %>
+  <div class="checkout">
+    <div class="row">
+      <div class="large-12 columns">
+        You have ordered <%= order.order_items.count %> dishes.
+        <a href="/checkout" style="color: white; font-weight: bold;">Checkout</a>
+      </div>
     </div>
-  <% end %>
+  </div>
+<% end %>
 
-  <%= yield %>
+<div class="intro">
+  <div class="row">
+    <div class="large-12 columns">
+      <div style="background-color:rgba(0,0,0,0.7); min-height:100%; width:100%;">
+        <div class="display-table" style="height:600px; width:100%;">
+          <div class="va-align">
+            <div>
+              <a href="/">MENU</a>
+            </div>
+
+            <% if current_user %>
+              <h2>
+                Welcome to SlowFood <%= current_user.name %></h2><br><br>
+              <a href="/logout" class="secondary hollow button">Logout</a>
+
+
+            <% else %>
+              <br>
+              <h2>Welcome to Slow Food</h2><br><br>
+              <a href="/signup" class="secondary hollow button">Register</a>
+              <a href="/login" class="secondary hollow button">Login</a>
+            <% end %>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<% flash.keys.each do |type| %>
+  <div class="flash">
+    <div class="row">
+      <div class="large-12 columns">
+        <%= flash[type] %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+<div class="about">
+  <div class="row">
+    <div class="large-12 columns">
+      <%= yield %>
+    </div>
+  </div>
+</div>
+
+
+<div class="contact">
+  <div style="background-color:rgba(0,0,0,0.7); min-height:100%; padding:32px; width:100%;">
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="display-table" style=" width:100%;">
+          <div class="va-align">
+            <h4>slowfood@slowfood.com </h4>
+            Holtermansgatan 1D, 411 29 Gothenburg
+            <br> 031-123456
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="footer-social">
+        <i class="fi fi-social-facebook"></i>
+        <i class="fi fi-social-twitter"></i>
+        <i class="fi fi-social-instagram"></i>
+        <i class="fi fi-social-linkedin"></i>
+      </div>
+      Built with <i class="fi fi-heart"></i> at Craft Academy 2017.
+      <p>Powered by <span class="orange">OpenSourced Software</span></p>
+    </div>
+  </div>
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/foundation.min.js"></script>
+<script>
+    $(document).foundation();
+</script>
 </body>
 </html>
