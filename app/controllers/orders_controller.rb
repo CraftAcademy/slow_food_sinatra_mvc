@@ -24,7 +24,7 @@ class SlowFoodApp
       # Send email to restaurant
       send_emails({customer: current_user.email, restaurant: 'thomas@craftacademy.se'})
       session[:order_id] = nil
-      erb :finalized
+      erb :finalized, notice: 'Your order have been submitted We\'ve notified the restaurant....'
     else
       redirect '/', notice: 'You need to login before finalizing order'
     end
