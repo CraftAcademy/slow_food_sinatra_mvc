@@ -13,7 +13,7 @@ class SlowFoodApp
 
   get '/checkout' do
     @order = order
-    erb :checkout
+    erb :checkout, layout: false
   end
 
   post '/finalize' do
@@ -26,7 +26,7 @@ class SlowFoodApp
       session[:order_id] = nil
       erb :finalized
     else
-      redirect '/checkout', notice: 'You need to login before finalizing order'
+      redirect '/', notice: 'You need to login before finalizing order'
     end
 
   end

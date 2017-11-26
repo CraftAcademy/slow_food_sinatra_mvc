@@ -25,7 +25,7 @@ require APP_ROOT.join('config', 'database')
 
 
 class SlowFoodApp < Sinatra::Base
-  disable :logger, :dump_errors
+  #disable :logger, :dump_errors
   enable :sessions
   register Sinatra::Flash
   helpers Sinatra::RedirectWithFlash

@@ -1,19 +1,37 @@
-<div id="order-details">
-  <% @order.order_items.each do |item| %>
-    <p>
-      <%= "#{item.product.name}  - #{item.product.price} kr" %>
-    </p>
-  <% end %>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Slow Food Sinatra</title>
+  <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="foundation-icons/foundation-icons.css">
+  <link rel="stylesheet" href="css/foundation.css"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
 
-  <strong>
-    Order total: <%= order.total %> kr
-  </strong>
-  <p>
-    Estimated pickup time: <%= pickup_time %>
-  </p>
-  <form action="/finalize" method="post">
-    <input type="submit" value="Confirm order" class="hollow button">
-  </form>
-</div>
+<body>
+
+<h3>Review your order</h3>
+<% if order %>
+  <div id="order-details" class="with-border">
+    <% order.order_items.each do |item| %>
+      <p>
+        <%= "#{item.product.name}  - #{item.product.price} kr" %>
+      </p>
+    <% end %>
+
+    <strong>
+      Order total: <%= order.total %> kr
+    </strong>
+    <p>
+      Estimated pickup time: <%= pickup_time %>
+    </p>
+    <form action="/finalize" method="post">
+      <input type="submit" value="Confirm order" class="hollow button">
+    </form>
+  </div>
+<% end %>
+</body>
+
 
 
