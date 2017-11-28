@@ -6,12 +6,13 @@ Feature: User can log in
 
   Background:
     Given the following users exist
-      | name   | password    |
-      | Thomas | my_password |
+      | name   | password    | email             |
+      | Thomas | my_password | random@random.com |
 
 
   Scenario: User is logged in if ge provides valid credentials
     Given I visit the sign in page
+    Then show me the page
     And I fill in "Name" with "Thomas"
     And I fill in "Password" with "my_password"
     And I click "Sign in"

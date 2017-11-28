@@ -1,24 +1,39 @@
-<h1 style="color: #a03020">Our menu</h1>
-<% @categories.each do |category| %>
-  <section id="<%= to_underscore(category) %>">
-    <h3 style="color: #a03020"><%= category.pluralize %></h3>
-    <% @products.each do |product| %>
-      <% if product.category == category %>
-        <div id="product-<%= product.id %>">
-          <h5>
-            <%= "#{product.name} - #{product.price} kr" %>
-          </h5>
-          <p>
-            <%= product.description %>
-          </p>
-          <form action="/order_create" method="post">
-            <input type="hidden" name="product_id" value="<%= product.id %>">
-            <input type="submit" value="Order" class="hollow button ">
-          </form>
+<div class="blog">
+  <h3 class="text-center"> Our <span class="orange"> <strong> Menu </strong></span></h3>
 
-        </div>
+  <% @categories.each do |category| %>
+    <section id="<%= to_underscore(category) %>">
+      <h3 class="text-center"><%= category.pluralize %></h3>
 
-      <% end %>
+      <% @products.each_slice(3) do |slice| %>
+
+
+          <% slice.each do |product| %>
+          <div class="row">
+            <% if product.category == category %>
+              <div class="medium-4 large-4 columns">
+
+                <div class="blog-item" id="product-<%= product.id %>">
+                  <h5>
+                    <%= "#{product.name} - #{product.price} kr" %>
+                  </h5>
+                  <p>
+                    <%= product.description %>
+                  </p>
+                  <form action="/order_create" method="post">
+                    <input type="hidden" name="product_id" value="<%= product.id %>">
+                    <input type="submit" value="Order" class="hollow button ">
+                  </form>
+                </div>
+              </div>
+
+            <% end %>
+          </div>
+
+          <% end %>
+
     <% end %>
-  </section>
-<% end %>
+
+    </section>
+  <% end %>
+</div>
